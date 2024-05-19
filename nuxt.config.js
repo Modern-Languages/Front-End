@@ -22,6 +22,14 @@ export default {
     ]
   },
 
+  googleFonts: {
+    families: {
+      'Kumbh Sans': [100, 200, 300, 400, 500, 600, 700],
+      Karla: [100, 200, 300, 400, 500, 600, 700],
+      Inter: [100, 200, 300, 400, 500, 600, 700]
+    }
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/css/index.css'
@@ -39,7 +47,8 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

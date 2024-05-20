@@ -98,7 +98,7 @@
           <v-row style="margin-top: 10px;">
             <v-col cols="12">
               <span class="already-account">Already have an account?</span>
-              <a href="" class="already-account" style="text-decoration: none; color: #2D88D4; font-weight: 700;">Sign In</a>
+              <a href="/login" class="already-account" style="text-decoration: none; color: #2D88D4; font-weight: 700;">Sign In</a>
             </v-col>
           </v-row>
         </v-card>

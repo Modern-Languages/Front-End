@@ -3,6 +3,7 @@
 {
   font-family: "Karla", sans-serif !important;
   font-style: normal !important;
+  letter-spacing: normal !important;
 }
 
 .home-banner
@@ -503,4 +504,132 @@
   color: #FCFAFA !important;
   text-transform: none !important;
   letter-spacing: normal !important;
+}
+
+.students-button-log-out
+{
+  width: 120px !important;
+  height: 40px !important;
+  padding: 10px !important;
+  gap: 10px !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+}
+
+.students-button-log-out-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: #424242 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border: none !important;
+}
+
+.students-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 19.84px !important;
+  text-align: center !important;
+  color: #4F4F4F !important;
+}
+
+.students-button-export-csv
+{
+  width: 106px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.students-button-export-csv-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: #2671B1 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.students-button-add-students
+{
+  width: 113px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: #509CDB !important;
+  border: none !important;
+}
+
+.students-button-add-students-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: white !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.students-button-add-filter
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  text-align: left !important;
+  color: #C4C4C4 !important;
+  width: 132.49px !important;
+  height: 49px !important;
+  letter-spacing: normal !important;
+}
+
+.students-search
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #8A8A8A !important;
+  letter-spacing: normal !important;
+}
+
+.students-section
+{
+  min-height: 60vh !important;
+  background-color: #FCFAFA !important;
+  align-content: center !important;
+}
+
+.students-section-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  line-height: 34.73px !important;
+  text-align: center !important;
+  color: #4F4F4F !important;
+}
+
+.students-section-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #4F4F4F !important;
 }

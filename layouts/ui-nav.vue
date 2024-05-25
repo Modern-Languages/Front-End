@@ -79,8 +79,8 @@ export default {
     selectedIndex: 0,
     links: [
       { icon: require('../assets/nav/dashboard_teachers.svg'), text: 'Dashboard', route: '/dashboard' },
-      { icon: require('../assets/nav/dashboard_teachers.svg'), text: 'Teachers', route: '' },
-      { icon: require('../assets/nav/students.svg'), text: 'Students / classes', route: '' },
+      { icon: require('../assets/nav/dashboard_teachers.svg'), text: 'Teachers', route: '/teachers' },
+      { icon: require('../assets/nav/students.svg'), text: 'Students / classes', route: 'students' },
       { icon: require('../assets/nav/billing_features.svg'), text: 'Billing', route: '' },
       { icon: require('../assets/nav/settings.svg'), text: 'Settings and profile', route: '' },
       { icon: require('../assets/nav/exams.svg'), text: 'Exams', route: '' }

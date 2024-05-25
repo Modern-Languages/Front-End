@@ -35,7 +35,9 @@
     <v-row class="ma-0 pa-16 pr-0 pt-13">
       <v-col class="ma-0 pa-0 pl-16">
         <v-row class="ma-0 pa-0 pl-5">
-          <p class="ma-0 pa-0 dasboard-title">Welcome to your dashboard, Udemy school</p>
+          <p class="ma-0 pa-0 dasboard-title">
+            Welcome to your dashboard, Udemy school
+          </p>
         </v-row>
 
         <v-row class="ma-0 pa-0 px-8">
@@ -55,7 +57,9 @@
 
                   <v-col class="ma-0 pa-0 ml-3">
                     <v-row class="ma-0 pa-0">
-                      <p class="ma-0 pa-0 dashboard-topic">Add other admins</p>
+                      <p class="ma-0 pa-0 dashboard-topic">
+                        Add other admins
+                      </p>
                     </v-row>
 
                     <v-row class="ma-0 pa-0 mt-4">
@@ -110,29 +114,31 @@
           </v-col>
         </v-row>
       </v-col>
-
-      <v-col cols="3" class="ma-0 pa-0 pb-16 d-flex flex-column justify-end">
-        <v-btn class="ma-0 pa-0 dashboard-button-support">
-          <v-row class="ma-0 pa-0" align="center">
-            <v-col cols="3" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
-              <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
-                <img src="@/assets/dashboard/support.svg" width="13.3px" height="13.3px">
-              </v-row>
-            </v-col>
-
-            <v-col class="ma-0 pa-0">
-              <p class="ma-0 pa-0 dashboard-button-support-text">Support</p>
-            </v-col>
-
-            <v-col cols="4" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
-              <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
-                <img src="@/assets/dashboard/arrow.svg" width="8px" height="4px">
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-btn>
-      </v-col>
     </v-row>
+
+    <v-col cols="3" class="ma-0 pa-0 pb-16 d-flex flex-column justify-end">
+      <v-btn class="ma-0 pa-0 dashboard-button-support">
+        <v-row class="ma-0 pa-0" align="center">
+          <v-col cols="3" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+            <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+              <img src="@/assets/dashboard/support.svg" width="13.3px" height="13.3px">
+            </v-row>
+          </v-col>
+
+          <v-col class="ma-0 pa-0">
+            <p class="ma-0 pa-0 dashboard-button-support-text">
+              Support
+            </p>
+          </v-col>
+
+          <v-col cols="4" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+            <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+              <img src="@/assets/dashboard/arrow.svg" width="8px" height="4px">
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-btn>
+    </v-col>
   </div>
 </template>
 

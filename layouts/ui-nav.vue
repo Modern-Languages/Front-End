@@ -44,7 +44,7 @@
 
       <v-sheet color="transparent" class="d-flex ma-0 pa-0 mt-7 justify-center align-center v-navigation-drawer-footer" height="200">
         <v-list class="ma-0 pa-0 d-flex flex-column align-center">
-          <v-list-item color="transparent" :to="link_footer" link class="ma-0 pa-0 px-5 mb-2 nav-item">
+          <v-list-item :to="link_footer.route" color="transparent" link class="ma-0 pa-0 px-5 mb-2 nav-item">
             <v-row class="ma-0 pa-0 justify-center align-center">
               <v-list-item-icon class="ma-0 pa-0">
                 <img class="ma-0 pa-0" :src="link_footer.icon" width="16px" height="16px">
@@ -81,12 +81,12 @@ export default {
       { icon: require('../assets/nav/dashboard_teachers.svg'), text: 'Dashboard', route: '/dashboard' },
       { icon: require('../assets/nav/dashboard_teachers.svg'), text: 'Teachers', route: '/teachers' },
       { icon: require('../assets/nav/students.svg'), text: 'Students / classes', route: 'students' },
-      { icon: require('../assets/nav/billing_features.svg'), text: 'Billing', route: '' },
-      { icon: require('../assets/nav/settings.svg'), text: 'Settings and profile', route: '' },
-      { icon: require('../assets/nav/exams.svg'), text: 'Exams', route: '' }
+      { icon: require('../assets/nav/billing_features.svg'), text: 'Billing', route: '/billing' },
+      { icon: require('../assets/nav/settings.svg'), text: 'Settings and profile', route: '/setting' },
+      { icon: require('../assets/nav/exams.svg'), text: 'Exams', route: '/exams' }
     ],
     link_footer:
-      { icon: require('../assets/nav/billing_features.svg'), text: 'Features', route: '' }
+      { icon: require('../assets/nav/billing_features.svg'), text: 'Features', route: '/features' }
   }),
   methods: {
     selectItem (index) {

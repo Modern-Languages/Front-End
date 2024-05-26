@@ -1,135 +1,127 @@
 <template>
-  <v-container>
-    <h1 class="teacher-title">
-      Teachers
-    </h1>
+  <div class="ma-0 pa-5">
+    <v-row class="ma-0 pa-0">
+      <v-spacer />
 
-    <v-row>
-      <v-col cols="2">
-        <v-select
-          :items="items"
-          placeholder="Add filter"
-          class="teachers-btn-add-filter align-start"
-          flat
-          solo
-          dense
-        />
-      </v-col>
-      <v-col cols="9" class=" d-flex align-end">
-        <v-text-field
-          placeholder="Search for a student by name or email"
-          prepend-inner-icon="mdi-magnify"
-          class="teachers-search"
-          flat
-          solo
-          dense
-        />
-      </v-col>
+      <v-btn icon>
+        <img src="../../assets/teachers/bell.svg" width="24px" height="24px">
+      </v-btn>
+
+      <v-btn class="teachers-button-log-out" elevation="0">
+        <span class="teachers-button-log-out-text">Log out</span>
+      </v-btn>
     </v-row>
 
-    <v-row v-if="!existingTeachers" class="teacher-message" align="end" justify="center">
-      <v-col cols="12" align="center" justify="center">
-        <h1 style="font-weight: 600;">
-          No Teachers at this time
-        </h1>
-        <h4 style="font-weight: 500;">
-          Teachers will appear here after they enroll in your school.
-        </h4>
-        <v-btn
-          class="teachers-btn-support white--text"
-          color="#152259"
-          fixed
-          button
-          right
-          rounded
-        >
-          <span>
-            <v-icon>mdi-face-agent</v-icon>
-            &nbsp;&nbsp;Support&nbsp;&nbsp;&nbsp;
-            <v-icon>mdi-chevron-up</v-icon>
-          </span>
+    <v-row class="ma-0 pa-0 pr-16 mt-8">
+      <v-col cols="1" class="ma-0 pa-0">
+        <p class="teachers-title">
+          Teachers
+        </p>
+      </v-col>
+
+      <v-spacer />
+
+      <v-col class="ma-0 pa-0 pr-8" align="end" justify="end">
+        <v-btn class="ma-0 pa-0 teachers-button-export-csv" elevation="0">
+          <span class="ma-0 pa-0 teachers-button-export-csv-text">Export CSV</span>
+        </v-btn>
+
+        <v-btn class="ma-0 pa-0 ml-3 teachers-button-add-teachers" elevation="0" @click="show_add_teacher = true">
+          <span class="ma-0 pa-0 teachers-button-add-teachers-text">Add Teachers</span>
         </v-btn>
       </v-col>
     </v-row>
 
-    <v-dialog v-model="dialogAddTeacher" width="969px" height="759px">
-      <add-teacher />
+    <v-row class="ma-0 pa-0 px-16 mt-8">
+      <v-col cols="auto" class="ma-0 pa-0 px-8">
+        <v-select
+          :items="items"
+          placeholder="Add filter"
+          class="teachers-button-add-filter"
+          flat
+          solo
+          dense
+        />
+      </v-col>
+
+      <v-col class="ma-0 pa-0 px-8 d-flex align-end">
+        <v-text-field
+          solo
+          flat
+          placeholder="Search for a student by name or email"
+          class="teachers-search"
+          height="49px"
+          background-color="#FCFAFA"
+        >
+          <template #prepend-inner>
+            <img class="ma-0 pa-0 mr-2" src="../../assets/teachers/search.svg" width="16px" height="16px">
+          </template>
+        </v-text-field>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="!existing_teachers" class="ma-0 pa-0 px-16">
+      <v-col class="ma-0 pa-0 px-8">
+        <v-row class="ma-0 pa-0">
+          <v-col class="ma-0 pa-0 pb-16 teachers-section">
+            <v-row class="ma-0 pa-0">
+              <v-col class="ma-0 pa-0 pb-7">
+                <v-row class="ma-0 pa-0" align="center" justify="center">
+                  <p class="ma-0 pa-0 teachers-section-title">
+                    No Teachers at this time
+                  </p>
+                </v-row>
+
+                <v-row class="ma-0 pa-0" align="center" justify="center">
+                  <p class="ma-0 pa-0 teachers-section-text">
+                    Teachers will appear here after they enroll in your school.
+                  </p>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+
+    <v-btn class="ma-0 pa-0 dashboard-button-support">
+      <v-row class="ma-0 pa-0" align="center">
+        <v-col cols="3" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+          <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+            <img src="@/assets/dashboard/support.svg" width="13.3px" height="13.3px">
+          </v-row>
+        </v-col>
+
+        <v-col class="ma-0 pa-0">
+          <p class="ma-0 pa-0 dashboard-button-support-text">
+            Support
+          </p>
+        </v-col>
+
+        <v-col cols="4" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+          <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
+            <img src="@/assets/dashboard/arrow.svg" width="8px" height="4px">
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-btn>
+
+    <v-dialog v-model="show_add_teacher" class="ma-0 pa-0" content-class="teachers-dialog">
+      <ui-add-teacher class="ma-0 pa-0" />
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
-import AddTeacher from '@/components/ui-add-teacher.vue'
-
 export default {
-  components: {
-    AddTeacher
-  },
-  layout: 'ui-teachers',
+  layout: 'ui-nav',
 
   data () {
     return {
-      existingTeachers: false,
-      dialogAddTeacher: true
+      existing_teachers: false,
+      show_add_teacher: false,
+      items: []
     }
   }
 }
 </script>
-
-<style scoped>
-.teacher-title {
-  font-family: Kumbh Sans;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19.84px;
-  color: #4F4F4F;
-}
-
-.teachers-btn-add-filter {
-  width: Fixed (132.49px)px;
-  height: Hug (49px)px;
-  padding: 16px 0px 0px 0px;
-  gap: 11px;
-  opacity: 0px;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17.36px;
-  text-align: left;
-  background-color: #FCFAFA;
-  color: #C4C4C4;
-}
-
-.teachers-search {
-  max-width: 819.51px;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17.36px;
-  text-align: left;
-  background: #FCFAFA;
-  padding: 16px 20px 16px 16px;
-}
-
-.teacher-message {
-  font-family: Kumbh Sans;
-  position: fixed;
-  top: 75%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #4F4F4F;
-}
-
-.teachers-btn-support {
-  width: 181px !important;
-  height: 60px !important;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17.36px;
-  text-align: left;
-  text-transform: none;
-  left: 110%;
-  top: 70%;
-}
-</style>

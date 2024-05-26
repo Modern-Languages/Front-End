@@ -538,6 +538,222 @@
   letter-spacing: normal !important;
 }
 
+.teachers-button-log-out
+{
+  width: 120px !important;
+  height: 40px !important;
+  padding: 10px !important;
+  gap: 10px !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+}
+
+.teachers-button-log-out-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: #424242 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border: none !important;
+}
+
+.teachers-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 19.84px !important;
+  text-align: center !important;
+  color: #4F4F4F !important;
+}
+
+.teachers-button-export-csv
+{
+  width: 106px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.teachers-button-export-csv-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: #2671B1 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.teachers-button-add-teachers
+{
+  width: 113px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: #509CDB !important;
+  border: none !important;
+}
+
+.teachers-button-add-teachers-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-align: center !important;
+  color: white !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.teachers-button-add-filter
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  text-align: left !important;
+  color: #C4C4C4 !important;
+  width: 132.49px !important;
+  height: 49px !important;
+  letter-spacing: normal !important;
+}
+
+.teachers-search
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #8A8A8A !important;
+  letter-spacing: normal !important;
+}
+
+.teachers-section
+{
+  min-height: 60vh !important;
+  background-color: #FCFAFA !important;
+  align-content: end !important;
+}
+
+.teachers-section-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  line-height: 34.73px !important;
+  text-align: center !important;
+  color: #4F4F4F !important;
+}
+
+.teachers-section-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #4F4F4F !important;
+}
+
+.teachers-dialog
+{
+  width: 90% !important;
+  height: 85% !important;
+  background-color: white !important;
+  margin-left: 341px !important;
+  margin-right: 100px !important;
+}
+
+.teachers-dialog-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 39.69px !important;
+  color: #4F4F4F !important;
+  letter-spacing: normal !important;
+}
+
+.teachers-dialog-subtitle
+{
+  font-family: Kumbh Sans !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  line-height: 22.32px !important;
+  letter-spacing: normal !important;
+  color: #4F4F4F !important;
+}
+
+.teachers-dialog-input-title
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #8A8A8A !important;
+}
+
+.teachers-dialog-text-field
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #C4C4C4 !important;
+}
+
+.teachers-dialog-button-add-another
+{
+  width: 131px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: transparent !important;
+}
+
+.teachers-dialog-button-add-another-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 19.84!important;
+  text-transform: none !important;
+  color: #4F4F4F !important;
+}
+
+.teachers-dialog-button-add-teachers
+{
+  width: 131px !important;
+  height: 41px !important;
+  padding: 12px 14px 12px 14px !important;
+  gap: 10px !important;
+  border-radius: 4px !important;
+  background-color: #F1F1F1 !important;
+}
+
+.teachers-dialog-button-add-teachers-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 17.36px !important;
+  text-transform: none !important;
+  color: #4F4F4F !important;
+}
+
+
 .students-button-log-out
 {
   width: 120px !important;
@@ -704,11 +920,6 @@
   color: #8A8A8A !important;
 }
 
-.v-form
-{
-  width: 100% !important;
-}
-
 .students-dialog-text-field
 {
   font-family: Kumbh Sans !important;
@@ -756,4 +967,15 @@
   line-height: 17.36px !important;
   text-transform: none !important;
   color: #4F4F4F !important;
+}
+
+.v-form
+{
+  width: 100% !important;
+}
+
+.comming-soon
+{
+  font-size: 30px !important;
+  font-weight: 600 !important;
 }

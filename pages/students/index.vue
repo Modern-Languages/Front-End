@@ -26,7 +26,7 @@
           <span class="ma-0 pa-0 students-button-export-csv-text">Export CSV</span>
         </v-btn>
 
-        <v-btn class="ma-0 pa-0 ml-3 students-button-add-students" elevation="0">
+        <v-btn class="ma-0 pa-0 ml-3 students-button-add-students" elevation="0" @click="show_add_student = true">
           <span class="ma-0 pa-0 students-button-add-students-text">Add Student</span>
         </v-btn>
       </v-col>
@@ -69,11 +69,15 @@
             </v-row>
 
             <v-row class="ma-0 pa-0 mt-10" align="center" justify="center">
-              <p class="ma-0 pa-0 students-section-title">No students at this time</p>
+              <p class="ma-0 pa-0 students-section-title">
+                No students at this time
+              </p>
             </v-row>
 
             <v-row class="ma-0 pa-0" align="center" justify="center">
-              <p class="ma-0 pa-0 students-section-text">Students will appear here after they enroll in your school.</p>
+              <p class="ma-0 pa-0 students-section-text">
+                Students will appear here after they enroll in your school.
+              </p>
             </v-row>
           </v-col>
         </v-row>
@@ -101,6 +105,168 @@
         </v-col>
       </v-row>
     </v-btn>
+
+    <v-dialog v-model="show_add_student" class="ma-0 pa-0" content-class="students-dialog">
+      <v-col class="ma-0 pa-16">
+        <v-row class="ma-0 pa-0 mt-10 px-8">
+          <p class="ma-0 pa-0 students-dialog-title">
+            Add Students
+          </p>
+        </v-row>
+
+        <v-row class="ma-0 pa-0 mt-8 px-8">
+          <v-col cols="2" class="ma-0 pa-0">
+            <p class="ma-0 pa-0 students-dialog-subtitle">
+              Manually
+            </p>
+          </v-col>
+
+          <v-col class="ma-0 pa-0">
+            <p class="ma-0 pa-0 students-dialog-subtitle">
+              Import CSV
+            </p>
+          </v-col>
+        </v-row>
+
+        <v-row class="ma-0 pa-0 pl-8 pr-16">
+          <v-form class="ma-0 pa-0">
+            <v-row class="ma-0 pa-0 mt-13">
+              <p class="ma-0 pa-0 students-dialog-input-title">
+                Name
+              </p>
+            </v-row>
+
+            <v-row class="ma-0 pa-0 mt-1">
+              <v-col cols="3" class="ma-0 pa-0">
+                <v-text-field
+                  v-model="student_name"
+                  type="text"
+                  class="ma-0 pa-0 students-dialog-text-field"
+                  height="42"
+                  hide-details
+                  outlined
+                />
+              </v-col>
+
+              <v-col cols="1" />
+
+              <v-col cols="3" class="ma-0 pa-0">
+                <v-row class="ma-0 pa-0">
+                  <v-select
+                    v-model="student_class"
+                    class="ma-0 pa-0 students-dialog-text-field"
+                    height="42"
+                    hide-details
+                    placeholder="Class"
+                    outlined
+                  />
+                </v-row>
+              </v-col>
+
+              <v-col cols="1" />
+
+              <v-col cols="3" class="ma-0 pa-0">
+                <v-row class="ma-0 pa-0">
+                  <v-select
+                    v-model="student_gender"
+                    class="ma-0 pa-0 students-dialog-text-field"
+                    height="42"
+                    hide-details
+                    placeholder="Gender"
+                    outlined
+                  />
+                </v-row>
+              </v-col>
+            </v-row>
+
+            <v-row class="ma-0 pa-0 mt-13">
+              <v-col cols="5" class="ma-0 pa-0">
+                <p class="ma-0 pa-0 students-dialog-input-title">
+                  Email address
+                </p>
+              </v-col>
+
+              <v-col cols="1" />
+
+              <v-col cols="5" class="ma-0 pa-0">
+                <p class="ma-0 pa-0 students-dialog-input-title">
+                  Phone number
+                </p>
+              </v-col>
+            </v-row>
+
+            <v-row class="ma-0 pa-0 mt-1">
+              <v-col cols="5" class="ma-0 pa-0">
+                <v-text-field
+                  v-model="student_email"
+                  type="email"
+                  class="ma-0 pa-0 students-dialog-text-field"
+                  height="7"
+                  hide-details
+                  outlined
+                />
+              </v-col>
+
+              <v-col cols="1" />
+
+              <v-col cols="5" class="ma-0 pa-0">
+                <v-text-field
+                  v-model="student_phone"
+                  type="text"
+                  class="ma-0 pa-0 students-dialog-text-field"
+                  height="7"
+                  hide-details
+                  outlined
+                />
+              </v-col>
+            </v-row>
+
+            <v-row class="ma-0 pa-0 mt-13">
+              <v-col cols="5" class="ma-0 pa-0">
+                <p class="ma-0 pa-0 students-dialog-input-title">
+                  Password
+                </p>
+              </v-col>
+            </v-row>
+
+            <v-row class="ma-0 pa-0 mt-1">
+              <v-col cols="5" class="ma-0 pa-0">
+                <v-text-field
+                  v-model="student_email"
+                  type="password"
+                  class="ma-0 pa-0 students-dialog-text-field"
+                  height="7"
+                  hide-details
+                  outlined
+                />
+              </v-col>
+            </v-row>
+          </v-form>
+
+          <v-card-actions class="ma-0 pa-0 mt-16" style="width: 100% !important;">
+            <v-col cols="5" class="ma-0 pa-0">
+              <v-row class="ma-0 pa-0">
+                <v-btn class="ma-0 pa-0 students-dialog-button-add-another" elevation="0" to="">
+                  <v-col cols="1" class="ma-0 pa-0">
+                    <img src="../../assets/students/add.svg" height="20" width="20" cover>
+                  </v-col>
+
+                  <v-col class="ma-0 pa-0">
+                    <span class="ma-0 pa-0 students-dialog-button-add-another-text">Add another</span>
+                  </v-col>
+                </v-btn>
+
+                <v-spacer class="ma-0 pa-0" />
+
+                <v-btn class="ma-0 pa-0 students-dialog-button-add-students" elevation="0" to="">
+                  <span class="ma-0 pa-0 students-dialog-button-add-students-text">Add student</span>
+                </v-btn>
+              </v-row>
+            </v-col>
+          </v-card-actions>
+        </v-row>
+      </v-col>
+    </v-dialog>
   </div>
 </template>
 
@@ -109,97 +275,11 @@ export default {
   layout: 'ui-nav',
   data () {
     return {
-      existing_students: false
+      existing_students: false,
+      show_add_student: false,
+      student_name: '',
+      student_class: ''
     }
   }
 }
 </script>
-
-<style scoped>
-.teacher-bar-export-btn {
-  width: Hug (106px)px;
-  height: Hug (41px)px;
-  padding: 12px 14px 12px 14px;
-  opacity: 0px;
-}
-
-.teacher-bar-export-text {
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17.36px;
-  text-align: center;
-  color: #2671B1;
-  text-transform: none;
-}
-.teacher-bar-add-btn {
-  width: Hug (118px)px;
-  height: Hug (41px)px;
-  padding: 12px 14px 12px 14px;
-  background-color: #2671B1;
-}
-
-.teacher-bar-add-text {
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17.36px;
-  text-align: center;
-  text-transform: none;
-  color: white;
-}
-
-.teacher-bar-logout-text {
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17.36px;
-  text-align: center;
-  color: #424242;
-  text-transform: none;
-}
-
-.techers-btn-add-filter {
-  max-width: 132.49px;
-  padding: 16px 0px 0px 0px;
-  background: #FFFFFF;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17.36px;
-  text-align: left;
-}
-
-.teachers-search {
-  max-width: 819.51px;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17.36px;
-  text-align: left;
-  background: #8A8A8A;
-  padding: 16px 20px 16px 16px;
-}
-
-.teacher-message {
-  font-family: Kumbh Sans;
-  position: fixed;
-  top: 75%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #4F4F4F;
-}
-
-.teachers-btn-support {
-  width: 181px !important;
-  height: 60px !important;
-  font-family: Kumbh Sans;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17.36px;
-  text-align: left;
-  text-transform: none;
-  left: 110%;
-  top: 70%;
-}
-</style>

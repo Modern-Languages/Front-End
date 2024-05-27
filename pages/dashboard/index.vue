@@ -22,7 +22,7 @@
           </v-col>
 
           <v-col cols="4" class="ma-0 pa-0 align-center justify-center" align="center">
-            <v-btn class="ma-0 pa-0 dashboard-button-log-out">
+            <v-btn class="ma-0 pa-0 dashboard-button-log-out" to="/">
               <p class="ma-0 pa-0 dashboard-button-log-out-text">
                 Log out
               </p>

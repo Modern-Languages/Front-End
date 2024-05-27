@@ -76,7 +76,7 @@
           <v-row class="ma-0 pa-0">
             <v-btn class="ma-0 pa-0 teachers-dialog-button-add-another" elevation="0" to="">
               <v-col cols="2" class="ma-0 pa-0">
-                <img src="../assets/teachers/add.svg" height="20" width="20" cover>
+                <img src="../assets/teachers-students/add.svg" height="20" width="20" cover>
               </v-col>
 
               <v-col class="ma-0 pa-0">

@@ -4,10 +4,10 @@
       <v-spacer />
 
       <v-btn icon>
-        <img src="../../assets/teachers/bell.svg" width="24px" height="24px">
+        <img src="../../assets/teachers-students/bell.svg" width="24px" height="24px">
       </v-btn>
 
-      <v-btn class="teachers-button-log-out" elevation="0">
+      <v-btn class="teachers-button-log-out" elevation="0" to="/">
         <span class="teachers-button-log-out-text">Log out</span>
       </v-btn>
     </v-row>
@@ -54,7 +54,7 @@
           background-color="#FCFAFA"
         >
           <template #prepend-inner>
-            <img class="ma-0 pa-0 mr-2" src="../../assets/teachers/search.svg" width="16px" height="16px">
+            <img class="ma-0 pa-0 mr-2" src="../../assets/teachers-students/search.svg" width="16px" height="16px">
           </template>
         </v-text-field>
       </v-col>

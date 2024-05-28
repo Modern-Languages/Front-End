@@ -1,6 +1,6 @@
 <template>
   <div class="ma-0 pa-5">
-    <v-row class="ma-0 pa-0">
+    <v-row v-if="!existing_teachers" class="ma-0 pa-0">
       <v-spacer />
 
       <v-btn icon>
@@ -12,7 +12,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="ma-0 pa-0 pr-16 mt-8">
+    <v-row v-if="!existing_teachers" class="ma-0 pa-0 pr-16 mt-8">
       <v-col cols="1" class="ma-0 pa-0">
         <p class="teachers-title">
           Teachers
@@ -32,10 +32,10 @@
       </v-col>
     </v-row>
 
-    <v-row class="ma-0 pa-0 px-16 mt-8">
+    <v-row v-if="!existing_teachers" class="ma-0 pa-0 px-16 mt-8">
       <v-col cols="auto" class="ma-0 pa-0 px-8">
         <v-select
-          :items="items"
+          :items="itemsFilter"
           placeholder="Add filter"
           class="teachers-button-add-filter"
           flat
@@ -48,7 +48,7 @@
         <v-text-field
           solo
           flat
-          placeholder="Search for a student by name or email"
+          placeholder="Search for a teachers by name or email"
           class="teachers-search"
           height="49px"
           background-color="#FCFAFA"
@@ -84,7 +84,7 @@
       </v-col>
     </v-row>
 
-    <v-btn class="ma-0 pa-0 dashboard-button-support">
+    <v-btn v-if="!existing_teachers" class="ma-0 pa-0 dashboard-button-support">
       <v-row class="ma-0 pa-0" align="center">
         <v-col cols="3" class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
           <v-row class="ma-0 pa-0 align-center justify-center" align="center" justify="center">
@@ -106,8 +106,92 @@
       </v-row>
     </v-btn>
 
-    <v-dialog v-model="show_add_teacher" class="ma-0 pa-0" content-class="teachers-dialog">
-      <ui-add-teacher class="ma-0 pa-0" />
+    <v-col v-if="existing_teachers" class="ma-0 pa-0 px-10">
+      <v-row class="ma-0 pa-0">
+        <v-col class="ma-0 pa-0">
+          <v-btn class="ma-0 pa-0 students-button-export-csv" elevation="0">
+            <span class="ma-0 pa-0 students-button-export-csv-text">Export CSV</span>
+          </v-btn>
+
+          <v-btn class="ma-0 pa-0 ml-3 students-button-add-students" elevation="0" @click="show_add_teacher = true">
+            <span class="ma-0 pa-0 students-button-add-students-text">Add Teachers</span>
+          </v-btn>
+        </v-col>
+
+        <v-spacer />
+
+        <v-btn icon>
+          <img src="../../assets/teachers-students/bell.svg" width="24px" height="24px">
+        </v-btn>
+
+        <v-btn class="students-button-log-out" elevation="0" to="/">
+          <span class="students-button-log-out-text">Log out</span>
+        </v-btn>
+      </v-row>
+
+      <v-row class="ma-0 pa-0">
+        <v-col cols="9" class="ma-0 pa-0">
+          <v-row class="ma-0 pa-0 mt-8">
+            <v-col cols="auto" class="ma-0 pa-0">
+              <v-select
+                :items="items_add_filter"
+                placeholder="Add filter"
+                class="students-button-add-filter"
+                flat
+                solo
+                dense
+              />
+            </v-col>
+
+            <v-col class="ma-0 pa-0 pl-8 d-flex align-end">
+              <v-text-field
+                solo
+                flat
+                placeholder="Search for a teachers by name or email"
+                class="students-search"
+                height="49px"
+                background-color="#FCFAFA"
+              >
+                <template #prepend-inner>
+                  <img class="ma-0 pa-0 mr-2" src="../../assets/teachers-students/search.svg" width="16px" height="16px">
+                </template>
+              </v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row class="ma-0 pa-0 mt-3">
+            <v-data-table
+              :headers="headers"
+              :items="teachers"
+              :items-per-page="12"
+              style="width: 100% !important;"
+              hide-default-footer
+              @click:row="selectTeacher"
+            >
+              <template #body="{ items }">
+                <tbody>
+                  <tr
+                    v-for="(item, index) in items"
+                    :key="index"
+                    :class="{ 'students-table-row-selected': item === teacherSelected }"
+                    @click="selectTeacher(item)"
+                  >
+                    <td>{{ item.Pro_Nombre }}</td>
+                    <td>{{ item.Pro_Sujeto }}</td>
+                    <td>{{ item.Pro_Class }}</td>
+                    <td>{{ item.Pro_Email }}</td>
+                    <td>{{ item.Pro_Gen }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-data-table>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-col>
+
+    <v-dialog v-model="show_add_teacher" class="ma-0 pa-0" max-width="800px" content-class="teachers-dialog">
+      <ui-add-teacher class="ma-0 pa-0" @closeDialog="closeDialog" />
     </v-dialog>
   </div>
 </template>
@@ -120,7 +204,53 @@ export default {
     return {
       existing_teachers: false,
       show_add_teacher: false,
-      items: []
+      itemsFilter: [],
+      existing_students: false,
+      show_add_student: false,
+      items_add_filter: [],
+      teacherSelected: [],
+
+      // TABLE
+      headers: [
+        { text: 'Name', value: 'Pro_Nombre', align: 'left', sortable: true },
+        { text: 'Subject', value: 'Pro_Sujeto', align: 'left', sortable: true },
+        { text: 'Class', value: 'Pro_Class', align: 'left', sortable: false },
+        { text: 'Email Address', value: 'Pro_Email', align: 'left', sortable: true },
+        { text: 'Gender', value: 'Pro_Gen', align: 'left', sortable: false }
+      ],
+      teachers: []
+    }
+  },
+
+  mounted () {
+    this.getAllTeachers()
+  },
+
+  methods: {
+    closeDialog () {
+      this.show_add_teacher = false
+      this.getAllTeachers()
+    },
+
+    selectTeacher (teacher) {
+      this.teacherSelected = teacher
+    },
+
+    getAllTeachers () {
+      const schId = 'UG'
+      const url = `/get-allProfesores/${schId}`
+
+      this.$axios.get(url)
+        .then((res) => {
+          if (res.data.message === 'Success') {
+            this.existing_teachers = true
+            this.teachers = res.data.users
+            console.log('🚀 ~ .then ~ this.teachers:', this.teachers)
+          }
+        })
+        .catch((err) => {
+          console.log('🚀 ~ this.$axios.get ~ err', err)
+        })
     }
   }
 }

@@ -22,7 +22,7 @@
           background-color="#FCFAFA"
         >
           <template #prepend-inner>
-            <img class="ma-0 pa-0 mr-2" src="../../../assets/teachers/search.svg" width="16px" height="16px">
+            <img class="ma-0 pa-0 mr-2" src="../../../assets/teachers-students/search.svg" width="16px" height="16px">
           </template>
         </v-text-field>
       </v-col>

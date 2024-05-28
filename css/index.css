@@ -889,6 +889,7 @@
   background-color: white !important;
   margin-left: 341px !important;
   margin-right: 100px !important;
+  overflow-y: hidden !important;
 }
 
 .students-dialog-title
@@ -972,6 +973,160 @@
 .v-form
 {
   width: 100% !important;
+}
+
+tbody td, th
+{
+  border: none !important;
+}
+
+.v-data-table-header span
+{
+  font-family: Kumbh Sans !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 14.88px !important;
+  color: #424242 !important;
+}
+
+tbody td
+{
+  font-family: Kumbh Sans !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 14.88px !important;
+  color: #4F4F4F !important;
+}
+
+tr:nth-child(odd)
+{
+  background-color: #ffffff;
+}
+
+tr:nth-child(even)
+{
+  background-color: #EBF6FF80;
+}
+
+.students-table-row-selected
+{
+  background-color: #509CDB !important;
+  cursor: pointer !important;
+}
+
+.students-table-row-selected td
+{
+  color: white !important;
+}
+
+.students-details-id
+{
+  font-family: Kumbh Sans !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 19.84px !important;
+  color: #424242 !important;
+}
+
+.students-details-photo
+{
+  border-radius: 50% !important;
+}
+
+.students-details-name
+{
+  font-family: Kumbh Sans !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 19.84px !important;
+  color: #1A1A1A !important;
+}
+
+.students-details-carrer
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #A7A7A7 !important;
+}
+
+.students-details-about
+{
+  font-family: Kumbh Sans !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 14.88px !important;
+  color: #1A1A1A !important;
+}
+
+.students-details-subtitle
+{
+  font-family: Kumbh Sans !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 14.88px !important;
+  color: #1A1A1A !important;
+}
+
+.students-details-text
+{
+  font-family: Kumbh Sans !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 17.36px !important;
+  color: #A7A7A7 !important;
+}
+
+.students-details-people-images
+{
+  position: relative !important;
+  height: 38px !important;
+}
+
+.students-details-people
+{
+  position: absolute !important;
+  border-radius: 50% !important;
+}
+
+.students-details-people:nth-child(1)
+{
+  left: 0px !important;
+  z-index: 1 !important;
+}
+
+.students-details-people:nth-child(2)
+{
+  left: 25px !important;
+  z-index: 2 !important;
+}
+
+.students-details-people:nth-child(3)
+{
+  left: 50px !important;
+  z-index: 3 !important;
+}
+
+.students-details-people:nth-child(4)
+{
+  left: 75px !important;
+  z-index: 4 !important;
+}
+
+.students-details-people:nth-child(5)
+{
+  left: 100px !important;
+  z-index: 5 !important;
+}
+
+.students-details-people-more
+{
+  font-family: Kumbh Sans !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  line-height: 12.4px !important;
+  color: #73B0E2 !important;
 }
 
 .comming-soon

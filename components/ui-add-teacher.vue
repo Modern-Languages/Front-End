@@ -348,6 +348,7 @@ export default {
             }
           })
           .catch((err) => {
+            // eslint-disable-next-line no-console
             console.log('🚀 ~ this.$axios.post ~ err:', err)
           })
       }

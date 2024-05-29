@@ -290,6 +290,7 @@ export default {
 
     selectTeacher (teacher) {
       const img = this.getTeacherPic(teacher.Pro_Id)
+      // eslint-disable-next-line no-console
       console.log('🚀 ~ selectTeacher ~ teacher:', teacher)
       this.$store.commit('setTeacherSelected', teacher)
       this.$store.commit('setTeacherSelectedImg', img)
@@ -305,10 +306,12 @@ export default {
           if (res.data.message === 'Success') {
             this.existing_teachers = true
             this.teachers = res.data.users
+            // eslint-disable-next-line no-console
             console.log('🚀 ~ .then ~ this.teachers:', this.teachers)
           }
         })
         .catch((err) => {
+          // eslint-disable-next-line no-console
           console.log('🚀 ~ this.$axios.get ~ err', err)
         })
     }

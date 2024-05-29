@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height data-app>
     <v-row align="center" justify="center">
       <v-col
         cols="12"
@@ -41,7 +41,11 @@
           </v-card-subtitle>
 
           <v-card-text style="padding: 0;">
-            <v-form>
+            <v-form
+              ref="form0"
+              v-model="validForm[0]"
+              lazy-validation
+            >
               <v-text-field
                 v-model="nameAdmin"
                 class="rounded fields"
@@ -76,7 +80,7 @@
                 placeholder="Enter the school email"
                 required
                 type="email"
-                :rules="requiredRule"
+                :rules="emailRule"
               />
             </v-form>
           </v-card-text>
@@ -90,7 +94,7 @@
               block
               height="42px"
               class="btnNext"
-              @click="stepper()"
+              @click="validForms(0)"
             >
               Next
             </v-btn>
@@ -120,7 +124,13 @@
                 style="padding: 21px;"
               >
                 <v-card-text style="padding: 0;">
-                  <v-form align="start" justify="start">
+                  <v-form
+                    ref="form1"
+                    v-model="validForm[1]"
+                    lazy-validation
+                    align="start"
+                    justify="start"
+                  >
                     <span class="password-title">Choose a password</span>
                     <v-text-field
                       v-model="password"
@@ -157,7 +167,7 @@
                     block
                     height="42px"
                     class="btnNext"
-                    @click="e1 = 3"
+                    @click="validForms(1)"
                   >
                     Next
                   </v-btn>
@@ -172,9 +182,16 @@
                 style="padding: 21px;"
               >
                 <v-card-text style="padding: 0;">
-                  <v-form align="center" justify="center">
+                  <v-form
+                    ref="form2"
+                    v-model="validForm[2]"
+                    lazy-validation
+                    align="center"
+                    justify="center"
+                  >
                     <v-select
-                      v-model="numberStaf"
+                      v-model="numberStaff"
+                      :items="itemsStaff"
                       class="rounded fields"
                       placeholder="Number of staff"
                       flat
@@ -185,7 +202,7 @@
                       :rules="requiredRule"
                     />
                     <v-text-field
-                      v-model="schoolAdress"
+                      v-model="schoolAddress"
                       class="rounded fields"
                       placeholder="School address"
                       flat
@@ -207,7 +224,7 @@
                     block
                     height="42px"
                     class="btnNext"
-                    @click="e1 = 4"
+                    @click="validForms(2)"
                   >
                     Next
                   </v-btn>
@@ -300,7 +317,12 @@ export default {
   data () {
     return {
       // RANDOM
-      title: ['Welcome, create your school account', 'Udemy school, Choose your password', 'Udemy school, Choose your staffs'],
+      title: [
+        'Welcome, create your school account',
+        'Udemy school, Choose your password',
+        'Udemy school, Choose your staffs'
+      ],
+      validForm: [false, false, false],
       stepperEnable: false,
 
       // STEPPER
@@ -311,9 +333,40 @@ export default {
       nameSchool: '',
       emailSchool: '',
 
+      // STEP 2
+      password: '',
+      confirmPassword: '',
+
+      // STEP 3
+      numberStaff: '',
+      itemsStaff: [
+        'Staff 1',
+        'Staff 2',
+        'Staff 3',
+        'Staff 4',
+        'Staff 5',
+        'Staff 6',
+        'Staff 7',
+        'Staff 8',
+        'Staff 9',
+        'Staff 10'
+      ],
+      schoolAddress: '',
+
       // RULES
       requiredRule: [
         v => !!v || 'This field is required'
+      ],
+      emailRule: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+      ],
+      passwordRule: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
+      ],
+      confirmPasswordRule: [
+        v => v === this.password || 'Password does not match'
       ]
     }
   },
@@ -322,9 +375,53 @@ export default {
     stepper () {
       this.stepperEnable = true
       this.e1 = 2
+    },
+
+    validForms (i) {
+      if (i === 0) {
+        this.validForm[i] = this.$refs.form0.validate()
+        if (this.validForm[0]) {
+          this.stepperEnable = true
+          this.e1 = 2
+        }
+      } else if (i === 1) {
+        this.validForm[i] = this.$refs.form1.validate()
+        if (this.validForm[1]) {
+          this.e1 = 3
+        }
+      } else if (i === 2) {
+        this.validForm[i] = this.$refs.form2.validate()
+        if (this.validForm[2]) {
+          this.e1 = 4
+        }
+      }
+    },
+
+    register () {
+      if (this.validForm[0] && this.validForm[1] && this.validForm[2]) {
+        const url = '/signup'
+        const data = {
+          sch_email: this.emailSchool,
+          sch_password: this.password,
+          sch_usuario: this.nameAdmin,
+          sch_nombre: this.nameSchool,
+          sch_Staff: this.numberStaff,
+          sch_direccion: this.schoolAddress
+        }
+
+        this.$axios.post(url, data)
+          .then((res) => {
+            if (res.data.message === 'Usuario Registrado Satisfactoriamente') {
+              this.$router.push({ path: '/login' })
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log('🚀 ~ register ~ error:', error)
+          })
+      }
     }
   }
-
 }
 </script>
 

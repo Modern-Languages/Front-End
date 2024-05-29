@@ -1019,6 +1019,18 @@ tr:nth-child(even)
   color: white !important;
 }
 
+.teachers-table-row-selected:hover td
+{
+  background-color: #509CDB !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+
+.teachers-table-row-selected td
+{
+  color: black !important;
+}
+
 .students-details-id
 {
   font-family: Kumbh Sans !important;

@@ -129,10 +129,10 @@
         </v-btn>
       </v-row>
 
-      <v-row class="ma-0 pa-0">
+      <v-row class="ma-0 pa-0 d-flex justify-start">
         <v-col cols="9" class="ma-0 pa-0">
           <v-row class="ma-0 pa-0 mt-8">
-            <v-col cols="auto" class="ma-0 pa-0">
+            <v-col cols="auto" class="ma-0 pa-0 pt-1 d-flex align-start">
               <v-select
                 :items="items_add_filter"
                 placeholder="Add filter"
@@ -143,7 +143,7 @@
               />
             </v-col>
 
-            <v-col class="ma-0 pa-0 pl-8 d-flex align-end">
+            <v-col class="ma-0 pa-0 pl-8 d-flex align-center">
               <v-text-field
                 solo
                 flat
@@ -166,17 +166,24 @@
               :items-per-page="12"
               style="width: 100% !important;"
               hide-default-footer
-              @click:row="selectTeacher"
+              @click:row="selectTeacher(item, index)"
             >
               <template #body="{ items }">
                 <tbody>
                   <tr
                     v-for="(item, index) in items"
                     :key="index"
-                    :class="{ 'students-table-row-selected': item === teacherSelected }"
+                    class="teachers-table-row-selected black--text"
                     @click="selectTeacher(item)"
                   >
-                    <td>{{ item.Pro_Nombre }}</td>
+                    <td>
+                      <v-avatar
+                        size="24"
+                      >
+                        <v-img :src="getTeacherPic(item.Pro_Id)" />
+                      </v-avatar>&nbsp;&nbsp;
+                      {{ item.Pro_Nombre }}
+                    </td>
                     <td>{{ item.Pro_Sujeto }}</td>
                     <td>{{ item.Pro_Class }}</td>
                     <td>{{ item.Pro_Email }}</td>
@@ -202,7 +209,7 @@ export default {
 
   data () {
     return {
-      existing_teachers: false,
+      existing_teachers: true,
       show_add_teacher: false,
       itemsFilter: [],
       existing_students: false,
@@ -218,22 +225,75 @@ export default {
         { text: 'Email Address', value: 'Pro_Email', align: 'left', sortable: true },
         { text: 'Gender', value: 'Pro_Gen', align: 'left', sortable: false }
       ],
-      teachers: []
+      teachers: [
+        {
+          Pro_Id: '1',
+          Pro_Nombre: 'John Doe',
+          Pro_Class: 'Class 1',
+          Pro_Gen: 'Male',
+          Pro_Password: '12345678',
+          Pro_Designacion: 'Profesor',
+          Pro_Email: 'x@x.com',
+          Pro_telefono: '12345678',
+          Pro_Sujeto: 'English'
+        },
+        {
+          Pro_Id: '2',
+          Pro_Nombre: 'Jane Doe',
+          Pro_Class: 'Class 2',
+          Pro_Gen: 'Female',
+          Pro_Password: '12345678',
+          Pro_Designacion: 'Profesor',
+          Pro_Email: 'x@x.com',
+          Pro_telefono: '12345678',
+          Pro_Sujeto: 'English'
+        },
+        {
+          Pro_Id: '3',
+          Pro_Nombre: 'Juan Doe',
+          Pro_Class: 'Class 3',
+          Pro_Gen: 'Male',
+          Pro_Password: '12345678',
+          Pro_Designacion: 'Profesor',
+          Pro_Email: 'x@x.com',
+          Pro_telefono: '12345678',
+          Pro_Sujeto: 'English'
+        },
+        {
+          Pro_Id: '4',
+          Pro_Nombre: 'Jane Doe',
+          Pro_Class: 'Class 4',
+          Pro_Gen: 'Female',
+          Pro_Password: '12345678',
+          Pro_Designacion: 'Profesor',
+          Pro_Email: 'x@x.com',
+          Pro_telefono: '12345678',
+          Pro_Sujeto: 'English'
+        }
+      ]
     }
   },
 
-  mounted () {
-    this.getAllTeachers()
-  },
+  // mounted () {
+  //   this.getAllTeachers()
+  // },
 
   methods: {
+    getTeacherPic (i) {
+      return `https://i.pravatar.cc/300?u=${i}`
+    },
+
     closeDialog () {
       this.show_add_teacher = false
       this.getAllTeachers()
     },
 
     selectTeacher (teacher) {
-      this.teacherSelected = teacher
+      const img = this.getTeacherPic(teacher.Pro_Id)
+      console.log('🚀 ~ selectTeacher ~ teacher:', teacher)
+      this.$store.commit('setTeacherSelected', teacher)
+      this.$store.commit('setTeacherSelectedImg', img)
+      this.$router.push('/teachers/profile')
     },
 
     getAllTeachers () {

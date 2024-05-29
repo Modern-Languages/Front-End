@@ -441,7 +441,7 @@ export default {
   layout: 'ui-nav',
   data () {
     return {
-      existing_students: false,
+      existing_students: true,
       show_add_student: false,
       items_add_filter: [],
       student_photo: '',

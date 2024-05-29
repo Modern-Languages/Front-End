@@ -1,5 +1,27 @@
 <template>
   <div class="ma-0 pa-5">
+    <v-row class="ma-0 pa-0">
+      <v-col class="ma-0 pa-0">
+        <v-btn class="ma-0 pa-0 students-button-export-csv" elevation="0">
+          <span class="ma-0 pa-0 students-button-export-csv-text">Export CSV</span>
+        </v-btn>
+
+        <v-btn class="ma-0 pa-0 ml-3 students-button-add-students" elevation="0" @click="show_add_teacher = true">
+          <span class="ma-0 pa-0 students-button-add-students-text">Add Teachers</span>
+        </v-btn>
+      </v-col>
+
+      <v-spacer />
+
+      <v-btn icon>
+        <img src="../../../assets/teachers-students/bell.svg" width="24px" height="24px">
+      </v-btn>
+
+      <v-btn class="students-button-log-out" elevation="0" to="/">
+        <span class="students-button-log-out-text">Log out</span>
+      </v-btn>
+    </v-row>
+
     <v-row class="ma-0 pa-0 px-16 mt-8">
       <v-col cols="auto" class="ma-0 pa-0 px-8">
         <v-select
@@ -14,6 +36,7 @@
 
       <v-col class="ma-0 pa-0 px-8 d-flex align-end">
         <v-text-field
+          v-model="teacher.Pro_Nombre"
           solo
           flat
           placeholder="Search for a student by name or email"
@@ -27,7 +50,6 @@
         </v-text-field>
       </v-col>
     </v-row>
-
     <v-container>
       <v-row align="center" justify="center" class="pa-16 ma-0">
         <v-col cols="6" align="center" justify="center">
@@ -35,15 +57,15 @@
             size="280px"
           >
             <img
-              :src="teacher.img"
+              :src="teacherImg"
             >
           </v-avatar>
           <br>
           <br>
           <br>
-          <strong class="teacher-profile-name">{{ teacher.name }}</strong>
+          <strong class="teacher-profile-name">{{ teacher.Pro_Nombre }}</strong>
           <br>
-          <small class="teacher-profile-subject">{{ teacher.subject }}</small>
+          <small class="teacher-profile-subject">{{ teacher.Pro_Sujeto }}</small>
           <br>
           <br>
           <br>
@@ -80,7 +102,7 @@
           <br>
           <v-row style="max-width: 350px;">
             <v-col cols="12">
-              <small class="teacher-profile-description">{{ teacher.description }}</small>
+              <small class="teacher-profile-description">{{ teacherAbout }}</small>
             </v-col>
           </v-row>
 
@@ -88,16 +110,15 @@
             <v-col cols="6">
               <strong class="teacher-profile-age-gender">Age</strong>
               <br>
-              <small class="teacher-profile-age-gender-info">{{ teacher.age }}</small>
+              <small class="teacher-profile-age-gender-info">{{ teacherAge }}</small>
             </v-col>
 
             <v-col cols="6">
               <strong class="teacher-profile-age-gender">Gender</strong>
               <br>
-              <small class="teacher-profile-age-gender-info">{{ teacher.gender }}</small>
+              <small class="teacher-profile-age-gender-info">{{ teacher.Pro_Gen }}</small>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col cols="12">
               <strong class="teacher-profile-same-class">Teachers from the same class</strong>
@@ -159,15 +180,10 @@ export default {
 
   data () {
     return {
-      teacher: {
-        name: 'Kristin Watson',
-        subject: 'Geology teacher',
-        subjectSize: '12',
-        age: '34',
-        gender: 'female',
-        img: 'https://i.pravatar.cc/280',
-        description: 'Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.'
-      },
+      teacher: {},
+      teacherImg: '',
+      teacherAbout: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, sed perferendis molestiae iste fuga magnam nemo minima pariatur eligendi soluta numquam quasi nesciunt nobis ab! Mollitia suscipit ex ipsa ipsam cum nisi ab maiores sit, architecto deserunt placeat iusto sed pariatur atque adipisci. Cupiditate commodi exercitationem necessitatibus dolore accusantium, dignissimos eum repellendus illum, dolorem ipsum, sequi vitae magnam hic laboriosam earum quibusdam fuga. Sit rerum eos sapiente sequi magni nam atque, id ipsa aspernatur architecto. Sequi voluptatum totam, cum quasi autem fuga vel modi necessitatibus veritatis nulla id porro corrupti, aliquid officiis eligendi recusandae ipsum quis expedita dolor labore eos.',
+      teacherAge: '',
 
       teachersAvatar: [
         'https://i.pravatar.cc/54',
@@ -176,6 +192,21 @@ export default {
         'https://i.pravatar.cc/57',
         'https://i.pravatar.cc/58'
       ]
+    }
+  },
+
+  mounted () {
+    this.getTeacherInfo()
+  },
+
+  methods: {
+    getTeacherInfo () {
+      this.teacher = this.$store.state.teacherSelected
+      this.teacherImg = this.$store.state.teacherSelectedImg
+
+      const min = 25
+      const max = 55
+      this.teacherAge = Math.floor(Math.random() * (max - min + 1)) + min
     }
   }
 }

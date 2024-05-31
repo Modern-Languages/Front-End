@@ -1,15 +1,7 @@
 <template>
   <div class="ma-0 pa-5">
     <v-row v-if="!existing_teachers" class="ma-0 pa-0">
-      <v-spacer />
-
-      <v-btn icon>
-        <img src="../../assets/teachers-students/bell.svg" width="24px" height="24px">
-      </v-btn>
-
-      <v-btn class="teachers-button-log-out" elevation="0" to="/">
-        <span class="teachers-button-log-out-text">Log out</span>
-      </v-btn>
+      <ui-nav-log-out-false class="ma-0 pa-0" />
     </v-row>
 
     <v-row v-if="!existing_teachers" class="ma-0 pa-0 pr-16 mt-8">

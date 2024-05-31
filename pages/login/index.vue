@@ -25,9 +25,9 @@
           </v-card-subtitle>
 
           <v-card-text style="padding: 0;">
-            <v-form>
+            <v-form ref="formLogin" v-model="validFormLogin">
               <v-text-field
-                v-model="nameAdmin"
+                v-model="user_school"
                 class="rounded login-fields"
                 flat
                 solo
@@ -39,7 +39,7 @@
                 :rules="requiredRule"
               />
               <v-text-field
-                v-model="password"
+                v-model="password_school"
                 class="rounded login-fields"
                 flat
                 solo
@@ -76,15 +76,23 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <ui-alert v-if="showAlert" :text="alertText" :color="alertColor" :type="alertType" />
   </v-container>
 </template>
 
 <script>
 export default {
+  auth: false,
   data () {
     return {
-      nameSchool: '',
-      emailSchool: '',
+      user_school: '',
+      password_school: '',
+      validFormLogin: false,
+      showAlert: false,
+      alertText: '',
+      alertColor: '',
+      alertType: '',
 
       // RULES
       requiredRule: [
@@ -95,8 +103,62 @@ export default {
 
   methods: {
     login () {
-      // eslint-disable-next-line no-console
-      return console.log('LOGIN')
+      this.validFormLogin = this.$refs.formLogin.validate()
+
+      if (this.validFormLogin) {
+        const sendData = {
+          sch_usuario: this.user_school,
+          sch_password: this.password_school
+        }
+
+        const url = 'login'
+
+        this.$axios.post(url, sendData)
+          .then((res) => {
+            console.log('@ Keyla => Res ', res)
+
+            if (res.data.token) {
+              this.showAlert = true
+              this.alertText = res.data.message
+              this.alertColor = '#152259'
+              this.alertType = 'success'
+
+              setTimeout(() => {
+                this.showAlert = false
+                localStorage.setItem('Token', res.data.token)
+
+                this.$router.push('/dashboard')
+              }, 3000)
+            }
+          })
+          .catch((err) => {
+            console.log('@ Keyla => Error ', err)
+
+            this.showAlert = true
+            this.alertText = err.response.data.message
+            this.alertColor = '#FF9F8E'
+            this.alertType = 'warning'
+
+            setTimeout(() => {
+              this.showAlert = false
+            }, 3000)
+
+            this.name_school = null
+            this.password_school = null
+          })
+      } else {
+        this.showAlert = true
+        this.alertText = 'Something is wrong'
+        this.alertColor = '#FF9F8E'
+        this.alertType = 'warning'
+
+        setTimeout(() => {
+          this.showAlert = false
+        }, 3000)
+
+        this.name_school = null
+        this.password_school = null
+      }
     }
   }
 

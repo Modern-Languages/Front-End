@@ -673,6 +673,7 @@
   background-color: white !important;
   margin-left: 341px !important;
   margin-right: 100px !important;
+  overflow-y: hidden !important;
 }
 
 .teachers-dialog-title
@@ -1029,6 +1030,13 @@ tr:nth-child(even)
 .teachers-table-row-selected td
 {
   color: black !important;
+}
+
+.students-table-avatar
+{
+  border-radius: 50% !important;
+  height: 25px !important;
+  width: 25px !important;
 }
 
 .students-details-id

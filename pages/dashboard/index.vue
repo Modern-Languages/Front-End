@@ -143,11 +143,45 @@
 </template>
 
 <script>
+import * as jose from 'jose'
+
 export default {
   layout: 'ui-nav',
   data () {
     return {
       //
+    }
+  },
+  mounted () {
+    this.get_token()
+  },
+  methods: {
+    get_token () {
+      const token = localStorage.getItem('Token')
+
+      console.log('Token token funcion:', token)
+
+      const secret = new TextEncoder().encode('SUPERSECRETA')
+
+      if (token) {
+        try {
+          const claims = jose.decodeJwt(token, secret)
+          console.log('@ Keyla => Claims:', claims)
+
+          localStorage.setItem('Usuario', claims.sch_usuario)
+
+          const user = localStorage.getItem('Usuario')
+
+          console.log('Token user school funcion:', user)
+
+          this.claims = claims
+        } catch (error) {
+          console.error('JWT Decryption Error:', error)
+        }
+      } else {
+        console.error('Token not found in localStorage')
+        return null
+      }
     }
   }
 }

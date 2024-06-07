@@ -202,7 +202,7 @@ export default {
   methods: {
     getTeacherInfo () {
       this.teacher = this.$store.state.teacherSelected
-      this.teacherImg = this.$store.state.teacherSelectedImg
+      this.teacherImg = this.$store.state.teacherSelected.photo
 
       const min = 25
       const max = 55

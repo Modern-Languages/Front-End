@@ -38,14 +38,12 @@
 
       <v-col class="ma-0 pa-0 px-8 d-flex align-end">
         <v-text-field
-          v-model="searchText"
           solo
           flat
           placeholder="Search for a teachers by name or email"
           class="teachers-search"
           height="49px"
           background-color="#FCFAFA"
-          @input="searchStudents()"
         >
           <template #prepend-inner>
             <img class="ma-0 pa-0 mr-2" src="../../assets/teachers-students/search.svg" width="16px" height="16px">
@@ -139,12 +137,14 @@
 
             <v-col class="ma-0 pa-0 pl-8 d-flex align-center">
               <v-text-field
+                v-model="searchText"
                 solo
                 flat
                 placeholder="Search for a teachers by name or email"
-                class="students-search"
+                class="teachers-search"
                 height="49px"
                 background-color="#FCFAFA"
+                @input="searchStudents()"
               >
                 <template #prepend-inner>
                   <img class="ma-0 pa-0 mr-2" src="../../assets/teachers-students/search.svg" width="16px" height="16px">
@@ -156,7 +156,7 @@
           <v-row class="ma-0 pa-0 mt-3">
             <v-data-table
               :headers="headers"
-              :items="teachers"
+              :items="filteredTeachers"
               :items-per-page="12"
               style="width: 100% !important;"
               hide-default-footer
@@ -174,7 +174,7 @@
                       <v-avatar
                         size="24"
                       >
-                        <v-img :src="getTeacherPic(item.Pro_Id)" />
+                        <v-img :src="item.photo" />
                       </v-avatar>&nbsp;&nbsp;
                       {{ item.Pro_Nombre }}
                     </td>
@@ -203,7 +203,7 @@ export default {
 
   data () {
     return {
-      existing_teachers: true,
+      existing_teachers: false,
       show_add_teacher: false,
       itemsFilter: [],
       existing_students: false,
@@ -244,21 +244,15 @@ export default {
       this.user_school = user
     },
 
-    getTeacherPic (i) {
-      return `https://i.pravatar.cc/300?u=${i}`
-    },
-
     closeDialog () {
       this.show_add_teacher = false
       this.getAllTeachers()
     },
 
     selectTeacher (teacher) {
-      const img = this.getTeacherPic(teacher.Pro_Id)
       // eslint-disable-next-line no-console
       console.log('🚀 ~ selectTeacher ~ teacher:', teacher)
       this.$store.commit('setTeacherSelected', teacher)
-      this.$store.commit('setTeacherSelectedImg', img)
       this.$router.push('/teachers/profile')
     },
 
@@ -277,6 +271,13 @@ export default {
             this.teachers = res.data.users
             // eslint-disable-next-line no-console
             console.log('🚀 ~ .then ~ this.teachers:', this.teachers)
+
+            this.teachers = res.data.users.map(teacher => ({
+              ...teacher,
+              photo: teacher.Pro_Gen === 'Female' ? `https://avatar.iran.liara.run/public/girl?${Math.random()}` : `https://avatar.iran.liara.run/public/boy?${Math.random()}`
+            }))
+
+            this.filteredTeachers = this.teachers
           }
         })
         .catch((err) => {
@@ -288,8 +289,12 @@ export default {
     searchStudents () {
       if (!this.searchText) {
         this.filteredTeachers = this.teachers
+        console.log('datos filteredTeachers', this.filteredTeachers)
       } else {
         const searchTextLower = this.searchText.toLowerCase()
+
+        console.log('datos searchText', this.searchText)
+
         this.filteredTeachers = this.teachers.filter((teacher) => {
           const nameMatch = teacher.Pro_Nombre.toLowerCase().includes(searchTextLower)
           const emailMatch = teacher.Pro_Email.toLowerCase().includes(searchTextLower)

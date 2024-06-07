@@ -38,12 +38,14 @@
 
       <v-col class="ma-0 pa-0 px-8 d-flex align-end">
         <v-text-field
+          v-model="searchText"
           solo
           flat
           placeholder="Search for a teachers by name or email"
           class="teachers-search"
           height="49px"
           background-color="#FCFAFA"
+          @input="searchStudents()"
         >
           <template #prepend-inner>
             <img class="ma-0 pa-0 mr-2" src="../../assets/teachers-students/search.svg" width="16px" height="16px">
@@ -217,60 +219,31 @@ export default {
         { text: 'Email Address', value: 'Pro_Email', align: 'left', sortable: true },
         { text: 'Gender', value: 'Pro_Gen', align: 'left', sortable: false }
       ],
-      teachers: [
-        {
-          Pro_Id: '1',
-          Pro_Nombre: 'John Doe',
-          Pro_Class: 'Class 1',
-          Pro_Gen: 'Male',
-          Pro_Password: '12345678',
-          Pro_Designacion: 'Profesor',
-          Pro_Email: 'x@x.com',
-          Pro_telefono: '12345678',
-          Pro_Sujeto: 'English'
-        },
-        {
-          Pro_Id: '2',
-          Pro_Nombre: 'Jane Doe',
-          Pro_Class: 'Class 2',
-          Pro_Gen: 'Female',
-          Pro_Password: '12345678',
-          Pro_Designacion: 'Profesor',
-          Pro_Email: 'x@x.com',
-          Pro_telefono: '12345678',
-          Pro_Sujeto: 'English'
-        },
-        {
-          Pro_Id: '3',
-          Pro_Nombre: 'Juan Doe',
-          Pro_Class: 'Class 3',
-          Pro_Gen: 'Male',
-          Pro_Password: '12345678',
-          Pro_Designacion: 'Profesor',
-          Pro_Email: 'x@x.com',
-          Pro_telefono: '12345678',
-          Pro_Sujeto: 'English'
-        },
-        {
-          Pro_Id: '4',
-          Pro_Nombre: 'Jane Doe',
-          Pro_Class: 'Class 4',
-          Pro_Gen: 'Female',
-          Pro_Password: '12345678',
-          Pro_Designacion: 'Profesor',
-          Pro_Email: 'x@x.com',
-          Pro_telefono: '12345678',
-          Pro_Sujeto: 'English'
-        }
-      ]
+      teachers: [],
+
+      // TOKEN Y USUARIO
+      user_school: '',
+      token: '',
+
+      // FILTRO
+      searchText: '',
+      filteredTeachers: []
     }
   },
 
-  // mounted () {
-  //   this.getAllTeachers()
-  // },
+  mounted () {
+    this.get_token()
+    this.getAllTeachers()
+  },
 
   methods: {
+    get_token () {
+      const token = localStorage.getItem('Token')
+      const user = localStorage.getItem('Usuario')
+      this.token = token
+      this.user_school = user
+    },
+
     getTeacherPic (i) {
       return `https://i.pravatar.cc/300?u=${i}`
     },
@@ -290,10 +263,14 @@ export default {
     },
 
     getAllTeachers () {
-      const schId = 'UG'
-      const url = `/get-allProfesores/${schId}`
+      const url = `/get-allProfesores/${this.user_school}`
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }
 
-      this.$axios.get(url)
+      this.$axios.get(url, config)
         .then((res) => {
           if (res.data.message === 'Success') {
             this.existing_teachers = true
@@ -306,6 +283,19 @@ export default {
           // eslint-disable-next-line no-console
           console.log('🚀 ~ this.$axios.get ~ err', err)
         })
+    },
+
+    searchStudents () {
+      if (!this.searchText) {
+        this.filteredTeachers = this.teachers
+      } else {
+        const searchTextLower = this.searchText.toLowerCase()
+        this.filteredTeachers = this.teachers.filter((teacher) => {
+          const nameMatch = teacher.Pro_Nombre.toLowerCase().includes(searchTextLower)
+          const emailMatch = teacher.Pro_Email.toLowerCase().includes(searchTextLower)
+          return nameMatch || emailMatch
+        })
+      }
     }
   }
 }

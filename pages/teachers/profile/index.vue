@@ -103,49 +103,24 @@
               <strong class="teacher-profile-same-class">Teachers from the same class</strong>
             </v-col>
 
-            <v-col cols="12">
-              <v-avatar>
-                <v-img
-                  :src="teachersAvatar[0]"
-                  width="54"
-                  height="54"
-                />
-              </v-avatar>
+            <v-row class="ma-0 pa-0 mt-3">
+              <v-col cols="8" class="ma-0 pa-0 students-details-people-images">
+                <img
+                  v-for="(person, index) in firstFiveTeachers"
+                  :key="index"
+                  class="ma-0 pa-0 students-details-people"
+                  :src="person.photo"
+                  width="38px"
+                  height="38px"
+                >
+              </v-col>
 
-              <v-avatar style="position: relative; left: -25px;">
-                <v-img
-                  :src="teachersAvatar[1]"
-                  width="54"
-                  height="54"
-                />
-              </v-avatar>
-
-              <v-avatar style="position: relative; left: -50px;">
-                <v-img
-                  :src="teachersAvatar[2]"
-                  width="54"
-                  height="54"
-                />
-              </v-avatar>
-
-              <v-avatar style="position: relative; left: -75px;">
-                <v-img
-                  :src="teachersAvatar[3]"
-                  width="54"
-                  height="54"
-                />
-              </v-avatar>
-
-              <v-avatar style="position: relative; left: -100px;">
-                <v-img
-                  :src="teachersAvatar[4]"
-                  width="54"
-                  height="54"
-                />
-              </v-avatar>
-
-              <a href="" class="teacher-profile-more">+{{ teacher.subjectSize }} more</a>
-            </v-col>
+              <v-col v-if="extraTeachers > 0" class="ma-0 pa-0 ml-2 d-flex flex-column justify-center">
+                <p class="ma-0 pa-0 students-details-people-more">
+                  +{{ extraStudents }} more
+                </p>
+              </v-col>
+            </v-row>
           </v-row>
         </v-col>
       </v-row>
@@ -159,15 +134,20 @@ export default {
 
   data () {
     return {
+      items: [],
       teacher: {
-        name: 'Kristin Watson',
-        subject: 'Geology teacher',
-        subjectSize: '12',
-        age: '34',
-        gender: 'female',
-        img: 'https://i.pravatar.cc/280',
         description: 'Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum. Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum.'
       },
+      allTeachers: [],
+      allClass: [],
+
+      token: '',
+      user_school: '',
+      classes: [],
+      classmates: [],
+
+      firstFiveTeachers: [],
+      extraTeachers: 0,
 
       teachersAvatar: [
         'https://i.pravatar.cc/54',
@@ -176,6 +156,76 @@ export default {
         'https://i.pravatar.cc/57',
         'https://i.pravatar.cc/58'
       ]
+    }
+  },
+
+  mounted () {
+    this.get_token()
+    this.getAllTeachers()
+    this.getAllClass()
+  },
+
+  methods: {
+    get_token () {
+      const token = localStorage.getItem('Token')
+      const user = localStorage.getItem('Usuario')
+      this.token = token
+      this.user_school = user
+    },
+
+    getAllTeachers () {
+      const url = `/get-allProfesores/${this.user_school}`
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }
+
+      this.$axios.get(url, config)
+        .then((res) => {
+          if (res.data.message === 'Success') {
+            this.allTeachers = res.data.users
+            // eslint-disable-next-line no-console
+            console.log('🚀 ~ .then ~ this.teachers:', this.teachers)
+
+            this.allTeachers = res.data.users.map(teacher => ({
+              ...teacher,
+              photo: teacher.Pro_Gen === 'Female' ? `https://avatar.iran.liara.run/public/girl?${Math.random()}` : `https://avatar.iran.liara.run/public/boy?${Math.random()}`
+            }))
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('🚀 ~ this.$axios.get ~ err', err)
+        })
+    },
+
+    getAllClass () {
+      const url = `get-allClases/${this.user_school}`
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      }
+
+      this.$axios.get(url, config)
+        .then((res) => {
+          console.log('@ Keyla => Res ', res)
+
+          if (res.data.message === 'Success') {
+            this.classes = res.data.users
+            this.classes = this.classes.map(clase => clase.Cla_Id)
+          }
+        })
+        .catch((err) => {
+          console.log('@ Keyla => Error ', err)
+        })
+    },
+
+    updateClassmates () {
+      this.classmates = this.allTeachers.filter(s => s.Pro_Clase === this.allTeachers.Alm_Clase && s.Pro_Id !== this.allTeachers.Pro_Id)
+      this.firstFiveTeachers = this.classmates.slice(0, 5)
+      this.extraTeachers = Math.max(this.classmates.length - 5, 0)
     }
   }
 }

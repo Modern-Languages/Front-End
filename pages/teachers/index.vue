@@ -128,7 +128,7 @@
               <v-select
                 :items="items_add_filter"
                 placeholder="Add filter"
-                class="students-button-add-filter"
+                class="ma-0 pa-0 students-button-add-filter"
                 flat
                 solo
                 dense
@@ -141,7 +141,7 @@
                 solo
                 flat
                 placeholder="Search for a teachers by name or email"
-                class="teachers-search"
+                class="ma-0 pa-0 teachers-search"
                 height="49px"
                 background-color="#FCFAFA"
                 @input="searchStudents()"
@@ -153,7 +153,7 @@
             </v-col>
           </v-row>
 
-          <v-row class="ma-0 pa-0 mt-3">
+          <v-row class="ma-0 pa-0">
             <v-data-table
               :headers="headers"
               :items="filteredTeachers"

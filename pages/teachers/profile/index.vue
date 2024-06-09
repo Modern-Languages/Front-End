@@ -212,7 +212,7 @@ export default {
           if (res.data.message === 'Success') {
             this.allTeachers = res.data.users
             // eslint-disable-next-line no-console
-            console.log('🚀 ~ .then ~ this.teachers:', this.teachers)
+            console.log('🚀 ~ .then ~ this.teachers:', this.allTeachers)
 
             this.allTeachers = res.data.users.map(teacher => ({
               ...teacher,
@@ -236,8 +236,6 @@ export default {
 
       this.$axios.get(url, config)
         .then((res) => {
-          console.log('@ Keyla => Res ', res)
-
           if (res.data.message === 'Success') {
             this.classes = res.data.users
             this.classes = this.classes.map(clase => clase.Cla_Id)
@@ -249,7 +247,7 @@ export default {
     },
 
     updateClassmates () {
-      this.classmates = this.allTeachers.filter(s => s.Pro_Clase === this.allTeachers.Alm_Clase && s.Pro_Id !== this.allTeachers.Pro_Id)
+      this.classmates = this.allTeachers.filter(s => s.Pro_Class === this.teacher.Pro_Class && s.Pro_Id !== this.teacher.Pro_Id)
       this.firstFiveTeachers = this.classmates.slice(0, 5)
       this.extraTeachers = Math.max(this.classmates.length - 5, 0)
     }

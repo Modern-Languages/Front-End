@@ -27,7 +27,7 @@
         <v-select
           :items="items"
           placeholder="Add filter"
-          class="teachers-button-add-filter"
+          class="ma-0 pa-0 teachers-button-add-filter"
           flat
           solo
           dense
@@ -40,7 +40,7 @@
           solo
           flat
           placeholder="Search for a student by name or email"
-          class="teachers-search"
+          class="ma-0 pa-0 teachers-search"
           height="49px"
           background-color="#FCFAFA"
         >
@@ -51,7 +51,7 @@
       </v-col>
     </v-row>
     <v-container>
-      <v-row align="center" justify="center" class="pa-16 ma-0">
+      <v-row align="center" justify="center" class="ma-0 pa-0 px-16 ma-0">
         <v-col cols="6" align="center" justify="center">
           <v-avatar
             size="280px"
@@ -100,7 +100,7 @@
           <strong class="teacher-profile-about">About</strong>
           <br>
           <br>
-          <v-row style="max-width: 350px;">
+          <v-row style="max-width: 90%;">
             <v-col cols="12">
               <small class="teacher-profile-description">{{ teacherAbout }}</small>
             </v-col>
@@ -121,27 +121,29 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <strong class="teacher-profile-same-class">Teachers from the same class</strong>
+              <v-row class="ma-0 pa-0">
+                <strong class="teacher-profile-same-class">Teachers from the same class</strong>
+              </v-row>
+
+              <v-row class="ma-0 pa-0 mt-3">
+                <v-col cols="4" class="ma-0 pa-0 students-details-people-images">
+                  <img
+                    v-for="(person, index) in firstFiveTeachers"
+                    :key="index"
+                    class="ma-0 pa-0 students-details-people"
+                    :src="person.photo"
+                    width="38px"
+                    height="38px"
+                  >
+                </v-col>
+
+                <v-col v-if="extraTeachers > 0" cols="auto" class="ma-0 pa-0 ml-2 d-flex flex-column">
+                  <p class="ma-0 pa-0 students-details-people-more">
+                    +{{ extraStudents }} more
+                  </p>
+                </v-col>
+              </v-row>
             </v-col>
-
-            <v-row class="ma-0 pa-0 mt-3">
-              <v-col cols="8" class="ma-0 pa-0 students-details-people-images">
-                <img
-                  v-for="(person, index) in firstFiveTeachers"
-                  :key="index"
-                  class="ma-0 pa-0 students-details-people"
-                  :src="person.photo"
-                  width="38px"
-                  height="38px"
-                >
-              </v-col>
-
-              <v-col v-if="extraTeachers > 0" class="ma-0 pa-0 ml-2 d-flex flex-column justify-center">
-                <p class="ma-0 pa-0 students-details-people-more">
-                  +{{ extraStudents }} more
-                </p>
-              </v-col>
-            </v-row>
           </v-row>
         </v-col>
       </v-row>

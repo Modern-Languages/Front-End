@@ -100,7 +100,7 @@
           <strong class="teacher-profile-about">About</strong>
           <br>
           <br>
-          <v-row style="max-width: 350px;">
+          <v-row style="max-width: 450px;">
             <v-col cols="12">
               <small class="teacher-profile-description">{{ teacherAbout }}</small>
             </v-col>
@@ -119,29 +119,34 @@
               <small class="teacher-profile-age-gender-info">{{ teacher.Pro_Gen }}</small>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12">
-              <strong class="teacher-profile-same-class">Teachers from the same class</strong>
-            </v-col>
 
-            <v-row class="ma-0 pa-0 mt-3">
-              <v-col cols="8" class="ma-0 pa-0 students-details-people-images">
-                <img
-                  v-for="(person, index) in firstFiveTeachers"
-                  :key="index"
-                  class="ma-0 pa-0 students-details-people"
-                  :src="person.photo"
-                  width="38px"
-                  height="38px"
-                >
-              </v-col>
-
-              <v-col v-if="extraTeachers > 0" class="ma-0 pa-0 ml-2 d-flex flex-column justify-center">
-                <p class="ma-0 pa-0 students-details-people-more">
-                  +{{ extraStudents }} more
+          <v-row class="ma-0 pa-0 mt-10">
+            <v-col class="ma-0 pa-0">
+              <v-row class="ma-0 pa-0 mt-1">
+                <p class="ma-0 pa-0 students-details-subtitle">
+                  Teachers from the same class
                 </p>
-              </v-col>
-            </v-row>
+              </v-row>
+
+              <v-row class="ma-0 pa-0 mt-3">
+                <v-col cols="4" class="ma-0 pa-0 students-details-people-images">
+                  <img
+                    v-for="(person, index) in firstFiveTeachers"
+                    :key="index"
+                    class="ma-0 pa-0 students-details-people"
+                    :src="person.photo"
+                    width="38px"
+                    height="38px"
+                  >
+                </v-col>
+
+                <v-col v-if="extraTeachers > 0" class="ma-0 pa-0 ml-2 d-flex flex-column justify-center">
+                  <p class="ma-0 pa-0 students-details-people-more">
+                    +{{ extraTeachers }} more
+                  </p>
+                </v-col>
+              </v-row>
+            </v-col>
           </v-row>
         </v-col>
       </v-row>
@@ -157,7 +162,7 @@ export default {
     return {
       teacher: {},
       teacherImg: '',
-      teacherAbout: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, sed perferendis molestiae iste fuga magnam nemo minima pariatur eligendi soluta numquam quasi nesciunt nobis ab! Mollitia suscipit ex ipsa ipsam cum nisi ab maiores sit, architecto deserunt placeat iusto sed pariatur atque adipisci. Cupiditate commodi exercitationem necessitatibus dolore accusantium, dignissimos eum repellendus illum, dolorem ipsum, sequi vitae magnam hic laboriosam earum quibusdam fuga. Sit rerum eos sapiente sequi magni nam atque, id ipsa aspernatur architecto. Sequi voluptatum totam, cum quasi autem fuga vel modi necessitatibus veritatis nulla id porro corrupti, aliquid officiis eligendi recusandae ipsum quis expedita dolor labore eos.',
+      teacherAbout: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, sed perferendis molestiae iste fuga magnam nemo minima pariatur eligendi soluta numquam quasi nesciunt nobis ab! Mollitia suscipit ex ipsa ipsam cum nisi ab maiores sit, architecto deserunt placeat iusto sed pariatur atque adipisci. Cupiditate commodi exercitationem necessitatibus dolore accusantium, dignissimos eum repellendus illum, dolorem ipsum, sequi vitae magnam hic laboriosam earum quibusdam fuga. Sit rerum eos sapiente sequi magni nam atque, id ipsa aspernatur architecto. Sequi voluptatum totam, cum quasi autem fuga vel modi necessitatibus veritatis nulla id.',
       teacherAge: '',
 
       allTeachers: [],

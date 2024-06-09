@@ -139,7 +139,7 @@
 
                 <v-col v-if="extraTeachers > 0" cols="auto" class="ma-0 pa-0 ml-2 d-flex flex-column">
                   <p class="ma-0 pa-0 students-details-people-more">
-                    +{{ extraStudents }} more
+                    +{{ extraTeachers }}  more
                   </p>
                 </v-col>
               </v-row>
